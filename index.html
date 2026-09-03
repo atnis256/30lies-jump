@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>『約三十の嘘』時間移動</title>
+
+  <style>
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      max-width: 720px;
+
+      margin: 60px auto;
+
+      padding: 0 24px;
+
+      line-height: 1.8;
+
+      color: #222;
+    }
+
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+
+    .description {
+      margin-bottom: 20px;
+    }
+
+
+    .bookmarklet {
+      display: inline-block;
+
+      margin: 25px 0;
+
+      padding: 16px 28px;
+
+      background: #333;
+
+      color: white;
+
+      text-decoration: none;
+
+      border-radius: 10px;
+
+      font-size: 18px;
+
+      font-weight: bold;
+
+      cursor: grab;
+
+      box-shadow:
+        0 3px 10px rgba(0,0,0,0.2);
+    }
+
+
+    .bookmarklet:hover {
+      background: #555;
+    }
+
+
+    .box {
+      margin-top: 30px;
+
+      padding: 22px;
+
+      background: #f5f5f5;
+
+      border-radius: 10px;
+    }
+
+
+    .important {
+      font-weight: bold;
+    }
+
+
+    .arrow {
+      font-size: 24px;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <h1>『約三十の嘘』時間移動</h1>
+
+
+  <p class="description">
+    観劇三昧の『約三十の嘘』で、
+    場面や役者ごとの指定時間へ
+    すぐに移動するためのブックマークです。
+  </p>
+
+
+  <p>
+    下のボタンを
+    <strong>ブックマークバーへドラッグしてください。</strong>
+  </p>
+
+
+  <p class="arrow">
+    ↓
+  </p>
+
+
+  <a
+    id="bookmarklet"
+    class="bookmarklet"
+    href="#"
+  >
+    『約三十の嘘』時間移動
+  </a>
+
+
+  <div class="box">
+
+    <h2>使い方</h2>
+
+    <p>
+      ① 観劇三昧で『約三十の嘘』を開く
+      <br>
+
+      ② 動画を一度再生できる状態にする
+      <br>
+
+      ③ ブックマークバーの
+      <strong>「『約三十の嘘』時間移動」</strong>
+      をクリック
+      <br>
+
+      ④ 画面右側に時間移動メニューが表示される
+      <br>
+
+      ⑤ 「第一場〜第五場」または
+      「役者・ページ」をクリック
+    </p>
+
+    <p class="important">
+      ※このブックマークの登録は最初の1回だけです。
+    </p>
+
+  </div>
+
+
+<script>
+
+const bookmarklet = `javascript:(()=>{const S=[["第一場","0:01:25"],["第二場","0:21:35"],["第三場","0:30:35"],["第四場","1:06:27"],["第五場","1:24:15"]],D=[["0:01:25","宝田","p1,p2"],["0:06:01","志方","p1,p2"],["0:06:10","横山","p1~3"],["0:13:19","横山","p4~6"],["0:21:35","宝田","p3,p4"],["0:24:25","宝田","p5"],["0:26:06","久津内","p1,p2,p3"],["0:26:56","宝田","p6~8"],["0:29:10","宝田","p9"],["0:30:35","佐々木","p1~4"],["0:30:35","志方","p3,p4"],["0:31:13","久津内","p4,p5"],["0:35:35","佐々木","p5,p6"],["0:35:50","久津内","p6,p7"],["0:40:15","久津内","p8"],["1:06:27","久津内","p9,p10"],["1:06:27","佐々木","p7,p8"],["1:08:39","佐々木","p9~11"],["1:09:13","久津内","p11~13"],["1:10:48","今井","p1~4"],["1:12:24","佐々木","p12~15"],["1:12:24","宝田","p10~14"],["1:16:50","今井","p5~8"],["1:18:14","横山","p7,p8"],["1:24:15","志方","p5,p6"],["1:24:15","横山","p9"],["1:25:20","志方","p7,p8"],["1:25:20","横山","p10"],["1:26:40","宝田","p15~17"],["1:27:08","今井","p9,p10"],["1:28:27","志方","p9,p10"],["1:29:47","志方","p11,p12"],["1:33:06","横山","p11,p12"],["1:34:00","今井","p11"]],C={"志方":["#f39c12","#e67e22","#000"],"久津内":["#d32f2f","#b71c1c","#fff"],"宝田":["#f1c40f","#d4ac0d","#000"],"横山":["#795548","#5d4037","#fff"],"今井":["#2e7d32","#1b5e20","#fff"],"佐々木":["#1976d2","#0d47a1","#fff"]},I="kangeki-time-jump-panel";document.getElementById(I)?.remove();const T=t=>{const a=t.split(":").map(Number);return a.length===3?a[0]*3600+a[1]*60+a[2]:a[0]*60+a[1]},V=(d=document)=>{let v=[];try{v.push(...d.querySelectorAll("video"));d.querySelectorAll("iframe").forEach(f=>{try{f.contentDocument&&(v=v.concat(V(f.contentDocument)))}catch(e){}})}catch(e){}return v},G=()=>{const v=V();return v.length?v.sort((a,b)=>{const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return B.width*B.height-A.width*A.height})[0]:null},J=t=>{const s=T(t),v=G();if(v){const q=()=>{try{v.currentTime=s;v.play().catch(()=>{})}catch(e){}};v.readyState===0?v.addEventListener("loadedmetadata",q,{once:true}):q();return}try{if(window.videojs){const p=window.videojs.getPlayers();for(const k in p)if(p[k]){p[k].currentTime(s);p[k].play();return}}}catch(e){}try{if(window.jwplayer){const p=window.jwplayer();p.seek(s);p.play(true);return}}catch(e){}alert("動画プレーヤーを取得できませんでした。\n動画を一度再生してから、もう一度クリックしてください。")},P=document.createElement("div");P.id=I;Object.assign(P.style,{position:"fixed",top:"20px",right:"20px",width:"350px",maxHeight:"90vh",overflowY:"auto",zIndex:"2147483647",background:"rgba(20,20,20,.97)",color:"#fff",borderRadius:"12px",padding:"12px",boxShadow:"0 4px 24px rgba(0,0,0,.45)",fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',fontSize:"14px"});const H=document.createElement("div");Object.assign(H.style,{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"10px",position:"sticky",top:"-12px",background:"#141414",padding:"10px 2px",zIndex:"10"});const A=document.createElement("strong");A.textContent="約三十の嘘｜時間ジャンプ";A.style.fontSize="16px";const X=document.createElement("button");X.textContent="×";Object.assign(X.style,{border:"none",background:"#444",color:"#fff",borderRadius:"6px",cursor:"pointer",width:"30px",height:"30px",fontSize:"18px"});X.onclick=()=>P.remove();H.append(A,X);P.appendChild(H);const h=t=>{const e=document.createElement("div");e.textContent=t;Object.assign(e.style,{fontWeight:"bold",fontSize:"15px",margin:"4px 0 8px",paddingBottom:"6px",borderBottom:"1px solid #555"});P.appendChild(e)};h("場ジャンプ");S.forEach(([n,t])=>{const e=document.createElement("button");e.textContent=n+"　"+t;Object.assign(e.style,{display:"block",width:"100%",padding:"11px 12px",margin:"5px 0",border:"1px solid #888",borderRadius:"7px",background:"#3b3b3b",color:"#fff",textAlign:"left",cursor:"pointer",fontSize:"14px",fontWeight:"bold"});e.onmouseenter=()=>e.style.background="#555";e.onmouseleave=()=>e.style.background="#3b3b3b";e.onclick=()=>J(t);P.appendChild(e)});const R=document.createElement("div");Object.assign(R.style,{height:"1px",background:"#555",margin:"16px 0 12px"});P.appendChild(R);h("役者・ページ");D.forEach(([t,n,p])=>{const e=document.createElement("button"),c=C[n]||["#292929","#454545","#fff"];e.textContent=t+"　"+n+"　"+p;Object.assign(e.style,{display:"block",width:"100%",padding:"10px 11px",margin:"5px 0",border:"1px solid rgba(255,255,255,.35)",borderRadius:"7px",background:c[0],color:c[2],textAlign:"left",cursor:"pointer",fontSize:"13px",fontWeight:"bold"});e.onmouseenter=()=>e.style.background=c[1];e.onmouseleave=()=>e.style.background=c[0];e.onclick=()=>J(t);P.appendChild(e)});document.body.appendChild(P)})();`;
+
+document.getElementById("bookmarklet").href = bookmarklet;
+
+</script>
+
+
+</body>
+
+</html>
